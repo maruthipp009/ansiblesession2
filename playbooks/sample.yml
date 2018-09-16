@@ -1,0 +1,6 @@
+---
+ - hosts: all    # this is my target section 
+   remote_user: root # this is user on all the remote machines 
+   tasks:           #  this is my task section 
+    - name: running  date command 
+      command: date          #we are using command module 

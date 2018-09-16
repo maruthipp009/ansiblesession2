@@ -1,0 +1,31 @@
+---
+ - hosts: all    # this is my target section 
+   remote_user: root # this is user on all the remote machines 
+   tasks:           #  this is my task section 
+    - name: installing  httpd  
+      yum: name=httpd state=present
+    
+    - name: starting  httpd service
+      service: name=httpd state=started  enabled=yes
+
+    - name: starting  firewalld service
+      service: name=firewalld state=stopped  enabled=no
+
+    - name: install and service is done
+      debug: msg="apache setup done"
+
+    - name: copy index.html page to target machine 
+      copy: src=mypage.html dest=/var/www/html/index.html 
+
+    - name: writing  html code 
+      copy: content="<h1> Hello data </h1>"  dest=/var/www/html/new.html
+
+    - name:  copying  page from URL  to remote destinaton
+      get_url: url=http://192.168.10.254/a.html  dest=/var/www/html/url.html
+
+
+
+
+
+
+

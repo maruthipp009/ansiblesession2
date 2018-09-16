@@ -1,0 +1,156 @@
+33  ansible  adhoc -u root  -m command -a "date" -k
+   34  ansible  adhoc -u root  -m command -a "whoami" -k
+   35  ansible  grp1 -u root  -m command -a "whoami" -k
+   36  ansible  192.168.10.16  -u root  -m command -a "whoami" -k
+   37  ansible all   -u root  -m command -a "whoami" -k
+   38  ansible all   -u root  -m shell -a "whoami" -k
+   39  ansible grp1:grp2   -u root  -m shell -a "whoami" -k
+   40  vim hosts 
+   41  ansible all   -u root  -m ping  -k
+   42  ansible all   -u root -a "cal"  -k
+   43  grep  -i  command  ansible.cfg 
+   44  grep  -in  command  ansible.cfg 
+   45  vim   +105  ansible.cfg  
+   46  ansible all   -u root    -k
+   47  vim   +105  ansible.cfg  
+   48  ansible all   -u root    -k
+   49  ansible all   -u root  -a "uptime"  -k
+   50  ansible all   -u root  -a "cal  |  wc -l"  -k
+   51  ansible all   -u root -m shell -a "cal  |  wc -l"  -k
+   52  ssh   root@192.168.10.16
+   53  ssh   root@192.168.10.108
+   54  ssh-keygen  
+   55  ssh-copy-id    root@192.168.10.16
+   56  ssh-copy-id    root@192.168.10.108
+   57  history 
+   58  ssh   root@192.168.10.108
+   59  ssh   root@192.168.10.16
+   60  ssh   root@192.168.10.16   date
+   61  ssh   root@192.168.10.108   date
+   62  ansible all -m ping
+   63  ansible all -m ping -u root 
+   64  ansible all  -u root  -a  "cal"
+   65  ansible --help
+   66  ansible all -u root  -m ping
+   67  ls  .ssh/
+   68  ls
+   69  vim  /tmp/data.txt 
+   70  ansible all -u root  -m copy  -a "src=/tmp/data.txt   dest=/root"
+   71  ansible all -u root  -m copy  -a "src=/tmp/data.txt   dest=/root/ok.txt"
+   72  ansible all -u root  -m copy  -a "src=/tmp/data.txt   dest=/root/ok.txt mode=700"
+   73  ansible all -u root  -m copy  -a "src=/tmp/data.txt   dest=/root/ok.txt mode=700          owner=bin"
+   74  ansible all -u root  -m copy  -a "src=/tmp/data.txt   dest=/root/ok.txt mode=700          owner=bin  group=wheel"
+   75  ansible-doc  copy  
+   76  ansible-doc  -l 
+   77  ansible-doc  -l    |   wc -l 
+   78  ansible --version
+   79  history 
+   80  ansible localhost  -u root  -m copy  -a "src=/tmp/data.txt   dest=/root/ok.txt mode=700          owner=bin  group=wheel"
+   81  ansible localhost  -m ping 
+   82  ansible localhost  -m command  -a  "date"
+   83  history 
+   84  ssh-copy-id    root@192.168.10.214
+   85  ssh-copy-id    root@192.168.10.245
+   86  ssh  root@192.168.10.245
+   87  ssh-copy-id    root@192.168.10.214
+   88  ssh-copy-id    root@192.168.10.246
+   89  ssh   192.168.10.245 -l root
+   90  ssh   192.168.10.246 -l root
+   91  pwd
+   92  ls
+   93  vim  ansible.cfg 
+   94  head  -15  ansible.cfg 
+   95  ls
+   96  vim hosts 
+   97  ansible  all -m ping -u root
+   98  ssh-copy-id  --help
+   99  man ssh-copy-id 
+  100  ansible  adhoc -u root -m ping
+  101  ls
+  102  vim  a.repo 
+  103  cat  a.repo 
+  104  scp  a.repo  root@192.168.10.254:/var/www/html
+  105  ls
+  106  ansible all -u root -m copy -a "src=a.repo dest=/etc/yum.repos.d/"  
+  107  ansible all -u root -m yum  -a  "name=telnet state=present" 
+  108  ansible all -u root -m yum  -a  "name=telnet state=absent" 
+  109  ansible-doc  yum 
+  110  ansible all -u root -m yum  -a  "name=vsftpd" 
+  111  ansible all -u root -m service  -a  "name=vsftpd state=restarted" 
+  112  ansible all -u root -m service  -a  "name=vsftpd state=started" 
+  113  ansible all -u root -m service  -a  "name=vsftpd state=started  enabled=yes" 
+  114  ansible all -u root -m service  -a  "name=vsftpd state=restarted  enabled=yes" 
+  115  ansible-doc  service\
+  116  ansible-doc  service
+  117  ansible all -u root -m service  -a  "name=vsftpd state=restarted  enabled=no" 
+  118  ansible all -u root -m service  -a  "name=vsftpd state=started  enabled=no" 
+  119  history 
+  120  pwd
+  121  ls
+  122  mkdir playbooks
+  123  ls
+  124  cp  ansible.cfg   playbooks/
+  125  cd playbooks/
+  126  pwd
+  127  ls
+  128  vim sample.yml
+  129  cat sample.yml 
+  130  ansible-playbook --syntax-check sample.yml 
+  131  vim sample.yml
+  132  cat sample.yml 
+  133  ansible-playbook --syntax-check sample.yml 
+  134  ansible-playbook  sample.yml 
+  135  vim sample.yml
+  136  ansible-playbook --syntax-check sample.yml 
+  137  ansible-playbook  sample.yml 
+  138  ansible all -u root -m ping 
+  139  scp /usr/bin/mkdir  root@192.168.10.245:/usr/bin
+  140   
+  141  ansible all -u root -m ping 
+  142  ansible-playbook  sample.yml 
+  143  ansible-playbook  -v sample.yml 
+  144  ls
+  145  cat  sample.retry 
+  146  ansible-playbook sample.yml --retry 
+  147  ansible-playbook sample.yml -retry 
+  148  ansible-playbook --limit @/sample.retry 
+  149  ansible-playbook sample.yml  --limit @/sample.retry 
+  150  ansible-playbook sample.yml  --limit @/home/ashutoshh/playbooks/sample.retry 
+  151  history 
+  152  ansible-playbook sample.yml  --limit @/home/ashutoshh/playbooks/sample.retry 
+  153  ls
+  154  cp  sample.yml   apache.yml
+  155  ls
+  156  vim  apache.yml  
+  157  ansible-playbook --syntax-check apache.yml 
+  158  ansible-playbook  apache.yml 
+  159  vim  apache.yml  
+  160  ansible-playbook  apache.yml 
+  161  vim  apache.yml  
+  162  ansible-playbook  apache.yml 
+  163  vim  apache.yml  
+  164  ansible-playbook  apache.yml 
+  165  vim  apache.yml  
+  166  ansible-playbook  apache.yml 
+  167  vim  apache.yml  
+  168  ansible-playbook  --check  apache.yml 
+  169  ansible-playbook  -C  apache.yml 
+  170  vim  apache.yml  
+  171  ansible-playbook  -C  apache.yml 
+  172  vim  apache.yml  
+  173  ls
+  174  vim mypage.html
+  175  cat mypage.html 
+  176  ansible-playbook  apache.yml 
+  177  cat mypage.html 
+  178  vim  apache.yml  
+  179  ansible-playbook  apache.yml 
+  180  vim  apache.yml  
+  181  ansible-playbook  apache.yml 
+  182  vim  apache.yml  
+  183  ansible-doc get_url
+  184  vim  apache.yml  
+  185  ansible-doc get_url
+  186  ansible-playbook  apache.yml 
+  187  vim  apache.yml  
+
