@@ -1,15 +1,17 @@
 ---
  - hosts: all             #  this is target section 
    remote_user: root    # this is also target section 
+   vars:              #  this is variable section 
+    - x: httpd
    tasks:
     - name: running a command
       command: whoami
 
-    - name: installing httpd
-      yum: name=httpd
+    - name: installing "{{ x }}"
+      yum: name="{{ x }}"
 
-    - name: starting httpd
-      service: name=httpd state=started  enabled=yes
+    - name: starting "{{ x }}"
+      service: name="{{ x }}" state=started  enabled=yes
 
     - name: copy index page to target machine 
       get_url: url=http://192.168.10.254/a.html dest=/var/www/html/index.html

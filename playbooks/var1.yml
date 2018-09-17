@@ -1,0 +1,21 @@
+---
+ - hosts: all
+   remote_user: root
+  #ignore_errors: yes  #  when you want to run further  modules evenif error is generated 
+   vars:
+    - c: date  # this is internal variable with local scope 
+   tasks:
+    - name: running "{{ c }}"
+      command: "{{ c }}"
+      register: out
+
+    - name: print  out data
+      debug: var=out
+
+    - name: parsing data 
+      debug:  msg="my exit code  is  {{ out.rc }}"
+
+    - name: want to save this error 
+      copy: content="my error code is  {{out.rc}}" dest=/tmp/error.txt  
+
+

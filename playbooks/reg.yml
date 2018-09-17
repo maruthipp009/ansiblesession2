@@ -1,0 +1,16 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+    - name: running a command
+      command: whoami
+      register: out
+
+    - name: running cal
+      command: cal
+      register: new
+
+    - name: combining output
+      debug: msg="first output is  {{out.stdout}} and second output is {{new.stdout}}"
+
+
