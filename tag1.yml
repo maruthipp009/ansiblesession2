@@ -1,0 +1,31 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+
+
+    - name: print ip related information 
+      debug: msg="my ip address is {{ansible_default_ipv4}}" 
+
+    - name: print ip address only 
+      debug: msg="my ip address is {{ansible_default_ipv4.address}}" 
+      tags:
+       - mac
+       - ip 
+
+    - name: print ip mac only 
+      debug: msg="my ip mac address is {{ansible_default_ipv4.macaddress}}" 
+      tags:
+       - hello
+
+    - name: printing os name
+      debug: msg="my OS is  {{ansible_distribution}}"
+      tags:
+       - always
+
+    - name: priting vcpu with hostname 
+      debug: msg="my vcpus are   {{ansible_processor_vcpus}} and hostname is {{ansible_hostname}}"
+
+
+
+

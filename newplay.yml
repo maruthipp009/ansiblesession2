@@ -1,0 +1,6 @@
+---
+ - hosts: new
+   remote_user: root
+   tasks:
+    - name: hw
+      debug: msg="Hello world with {{ x }}"

@@ -1,0 +1,27 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+    - name: installing  httpd
+      yum: name=httpd 
+      when: ansible_distribution == 'RedHat'
+
+    - name: installing  apache
+      apt: name=apache2
+      when: ansible_distribution == 'Ubuntu'
+
+
+    - name: starting  httpd
+      service: name=httpd state=started 
+      when: ansible_distribution == 'RedHat'
+
+    - name: starting  apache2
+      service: name=apache2 state=started 
+      when: ansible_distribution == 'Ubuntu'
+
+
+    - name: copying page
+      copy:  content="hello" dest=/var/www/html/index.html
+
+
+

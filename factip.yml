@@ -1,0 +1,15 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+    - name: getting network related infomation 
+      copy: content="{{ansible_default_ipv4.address}}" dest=/var/www/html/index.html
+
+    - name: restarting  web server
+      service: name=httpd state=restarted
+
+    - name: firewall flush
+      shell: iptables -F
+
+
+
